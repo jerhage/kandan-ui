@@ -50,9 +50,8 @@ h6 {
   text-wrap: balance;
 }
 /*
-  Disabled for SvelteKit: #root and #__next are React and Next.js mount
-  points. SvelteKit mounts into a display: contents wrapper, where
-  isolation has no effect. Uncomment in a React or Next.js project.
+  Disabled by default: #root and #__next are React and Next.js mount
+  points. Uncomment in a project that mounts into one of them.
 
 #root,
 #__next {

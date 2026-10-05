@@ -1,8 +1,8 @@
 /*
-  The same statement is inlined in src/app.html ahead of %sveltekit.head%.
+  The same statement is inlined in the page's head, ahead of any stylesheet.
   Layer order is fixed by the first time the browser sees each name, and a
   component's own stylesheet (a domain file in the features layer) can load
-  before this file. Declaring the order in app.html first means no import
+  before this file. Declaring the order in the page first means no import
   order can move a layer. Repeating it here changes nothing and keeps this
   file readable on its own.
 */
