@@ -1,0 +1,12 @@
+{
+  "name": "kandan-ui",
+  "private": true,
+  "type": "module",
+  "description": "The framework-agnostic core of Kandan UI: stylesheets, fonts, icons, the appearance script, and the markup contract its framework versions are tested against.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
