@@ -371,5 +371,5 @@ Render the variant in a framework version, write `fixtureText(rendered)` to
   tokens, themes, component classes, utilities, motion, breakpoints).
 - `library-files.test.js`: the file walker the specs use.
 
-To type-check, install TypeScript and Node's types as dev dependencies and run
-`tsc --noEmit -p .`; `jsconfig.json` enables `checkJs`.
+`npm run check` type-checks the JSDoc types with `tsc --noEmit -p jsconfig.json`;
+`jsconfig.json` enables `checkJs`. Run `npm install` once first.
