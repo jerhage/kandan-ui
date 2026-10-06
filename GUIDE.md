@@ -273,6 +273,15 @@ puts it.
   `rules/icon-button.json` restates the tooltip's rules on these fixtures, since a rule cannot refer
   to another file's. The `title` variants are unchanged; a framework version offers the library
   tooltip as an option of the icon button, not as a second component.
+- `context-menu/attached` is a context menu attached to an element it does not wrap.
+  `context-menu/default` wraps its area in `div.context-menu` (`display: contents`), which cannot
+  sit where only certain children are allowed, such as between `tbody` and `tr`. Attached, the area
+  is the caller's own element (here a table row), and it gains no attribute. The menu,
+  `div.dropdown-menu` with `role="menu"` and `popover="manual"`, is rendered where a `div` is valid,
+  here after the table's wrapper: a popover inside a `table`, a `tbody` or a `tr` but outside a cell
+  is not valid HTML. The rules in `rules/context-menu.json` are the wrapped menu's, restated on this
+  fixture: the area answers the secondary click, Shift+F10 and the ContextMenu key, and the menu,
+  now outside the area, answers its own keys, focus leaving it and a secondary click inside it.
 
 ### Running the contract spec in a framework version
 
