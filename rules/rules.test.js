@@ -74,7 +74,7 @@ function selectorClasses(selector) {
 }
 
 describe('the behaviour rules', () => {
-  it('cover the seventeen components that run a script or a native behaviour', () => {
+  it('cover the eighteen components that run a script or a native behaviour', () => {
     assert.deepEqual(ruleFiles(), [
       'accordion-item.json',
       'appearance-choices.json',
@@ -92,6 +92,7 @@ describe('the behaviour rules', () => {
       'toast-clearance.json',
       'toast-region.json',
       'toast.json',
+      'tooltip.json',
       'window-dropzone.json',
     ]);
   });
