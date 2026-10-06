@@ -303,6 +303,25 @@ function outcomeProblems(outcome, where) {
   return problems;
 }
 
+const PRESSES = ['pointerdown', 'mousedown'];
+
+const AFTER_A_PRESS = ['pointermove', 'pointerup', 'pointercancel'];
+
+/**
+ * @param {readonly unknown[]} triggers
+ * @param {string} where
+ * @returns {readonly string[]}
+ */
+function unpressedProblems(triggers, where) {
+  const events = triggers.map((trigger) => (isRecord(trigger) ? String(trigger.event) : ''));
+  const firstPress = events.findIndex((event) => PRESSES.includes(event));
+  return events.flatMap((event, index) => {
+    if (!AFTER_A_PRESS.includes(event)) return [];
+    if (firstPress !== -1 && firstPress < index) return [];
+    return [`${where}[${index}]: a ${event} follows a press`];
+  });
+}
+
 /**
  * @param {unknown} rule
  * @param {string} where
@@ -327,6 +346,7 @@ function ruleProblems(rule, where) {
   problems.push(
     ...listProblems(rule.given, `${where}.given`, stateProblems, false),
     ...listProblems(rule.when, `${where}.when`, triggerProblems, true),
+    ...(Array.isArray(rule.when) ? unpressedProblems(rule.when, `${where}.when`) : []),
     ...listProblems(rule.then, `${where}.then`, stateProblems, !observed),
     ...listProblems(rule.emits, `${where}.emits`, emittedProblems, false),
   );

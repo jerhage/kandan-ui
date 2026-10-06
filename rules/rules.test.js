@@ -215,4 +215,9 @@ describe('rulesFileProblems', () => {
     ]);
   });
 
+  it('rejects a lift, a move or a cancel that no press comes before', () => {
+    const when = [{ event: 'pointerup' }, { event: 'pointerdown' }, { event: 'pointercancel' }];
+
+    assert.deepEqual(problemsOf({ when }), ['rules[0].when[0]: a pointerup follows a press']);
+  });
 });

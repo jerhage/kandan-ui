@@ -313,6 +313,9 @@ read against a fixture:
   `prop`, `value`), `call` (a method is called: `method`, `value`), `time` (`ms` pass), `mount`,
   `unmount`, `animationsend` (the element's running animations finish). `target` is a selector,
   or `window` or `document`.
+- A pointer gesture is written whole: a `pointermove`, `pointerup` or `pointercancel` follows a
+  `pointerdown` (or `mousedown`) earlier in the same `when`, and its `dx` and `dy` are its travel
+  from that press. A lift with no press before it ends nothing.
 - `then` lists element states after the triggers: `attributes` (a value, or `null` for absent),
   `classes` (present or not), `style` (a custom property's value, `set` for any value, `null`, or
   a measured value), `properties` (DOM properties such as `value`), `focused`, `open` (a popover
