@@ -37,6 +37,7 @@ html:has(.drawer-backdrop[open][data-page-scrollbar]) {
   .drawer-backdrop.is-leaving,
   .drawer-backdrop.is-leaving > .drawer,
   .dropdown.is-open .dropdown-menu,
+  .context-menu > .dropdown-menu,
   .tooltip,
   .combobox-listbox,
   .file-item,

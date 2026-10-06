@@ -220,6 +220,7 @@ const CONTRACT_CLASSES = {
   toast: ['toast-success', 'toast-warning', 'toast-danger', 'toast-info'],
   dropdown: ['dropdown-menu', 'dropdown-item', 'dropdown-separator', 'is-open'],
   tooltip: [],
+  'context-menu': [],
   combobox: [
     'combobox-control',
     'combobox-listbox',
