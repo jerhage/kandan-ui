@@ -295,7 +295,7 @@ the framework renders it.
 ## The behaviour rules
 
 `rules/<component>.json` describes what a component's script (or a native element) does, for
-the eighteen components that have one. A rule is a state before, an event, and a state after,
+the nineteen components that have one. A rule is a state before, an event, and a state after,
 read against a fixture:
 
 ```json
