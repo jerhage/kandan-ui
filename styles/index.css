@@ -65,6 +65,7 @@
 @import 'components/toast.css' layer(components);
 @import 'components/dropdown.css' layer(components);
 @import 'components/popover.css' layer(components);
+@import 'components/tooltip.css' layer(components);
 @import 'components/command.css' layer(components);
 @import 'components/nav/nav-link.css' layer(components);
 @import 'components/nav/breadcrumb.css' layer(components);
