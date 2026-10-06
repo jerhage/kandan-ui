@@ -220,6 +220,16 @@ const CONTRACT_CLASSES = {
   toast: ['toast-success', 'toast-warning', 'toast-danger', 'toast-info'],
   dropdown: ['dropdown-menu', 'dropdown-item', 'dropdown-separator', 'is-open'],
   tooltip: [],
+  drawer: [
+    'drawer-backdrop',
+    'drawer-header',
+    'drawer-title',
+    'drawer-body',
+    'drawer-footer',
+    'drawer-close',
+    'drawer-start',
+    'drawer-bottom',
+  ],
   breadcrumb: ['breadcrumb-item', 'breadcrumb-separator'],
   pagination: ['pagination-item', 'is-active', 'is-disabled'],
   avatar: ['avatar-sm', 'avatar-lg', 'avatar-stack'],
@@ -1540,11 +1550,69 @@ describe('the design system stylesheets', () => {
     );
   });
 
+  it('locks the page and keeps its scrollbar gutter while a drawer is open, as a modal does', () => {
+    const overrides = style('overrides/overrides.css');
+
+    assertContains(
+      declarations(ruleBody(overrides, 'html:has(.drawer-backdrop[open])')),
+      'overflow: hidden',
+    );
+    assertContains(
+      declarations(ruleBody(overrides, 'html:has(.drawer-backdrop[open][data-page-scrollbar])')),
+      'scrollbar-gutter: stable',
+    );
+  });
+
+  it('slides a drawer in from its own edge and out to it, in either direction, and stops the slide when motion is reduced', () => {
+    const drawer = style('components/drawer.css');
+    const named = /** @param {string} selector */ (selector) =>
+      declarations(ruleBody(drawer, selector)).find((line) => line.startsWith('animation'));
+    const reduced = mediaBlock(
+      style('overrides/overrides.css'),
+      '(prefers-reduced-motion: reduce)',
+    );
+    const stopped = rules(reduced).find((rule) => rule.body.includes('animation: none'));
+
+    assert.deepEqual(
+      [
+        named('.drawer-backdrop[open] > .drawer'),
+        named('.drawer-backdrop[open] > .drawer:dir(rtl)'),
+        named('.drawer-backdrop[open] > .drawer.drawer-start'),
+        named('.drawer-backdrop[open] > .drawer.drawer-start:dir(rtl)'),
+        named('.drawer-backdrop[open] > .drawer.drawer-bottom'),
+        named('.drawer-backdrop[open].is-leaving > .drawer'),
+        named('.drawer-backdrop[open].is-leaving > .drawer:dir(rtl)'),
+        named('.drawer-backdrop[open].is-leaving > .drawer.drawer-start'),
+        named('.drawer-backdrop[open].is-leaving > .drawer.drawer-start:dir(rtl)'),
+        named('.drawer-backdrop[open].is-leaving > .drawer.drawer-bottom'),
+      ],
+      [
+        'animation: kEnterFromRight var(--dur-moderate) var(--ease-out) both',
+        'animation-name: kEnterFromLeft',
+        'animation-name: kEnterFromLeft',
+        'animation-name: kEnterFromRight',
+        'animation-name: kEnterFromBottom',
+        'animation: kLeaveToRight var(--transition-exit) both',
+        'animation-name: kLeaveToLeft',
+        'animation-name: kLeaveToLeft',
+        'animation-name: kLeaveToRight',
+        'animation-name: kLeaveToBottom',
+      ],
+    );
+    assertContainsAll(stopped?.selectors, [
+      '.drawer-backdrop[open]',
+      '.drawer-backdrop[open] > .drawer',
+      '.drawer-backdrop.is-leaving',
+      '.drawer-backdrop.is-leaving > .drawer',
+    ]);
+  });
+
   it('hides the transient overlays and flattens the framed surfaces when the page is printed', () => {
     const print = mediaBlock(style('overrides/overrides.css'), 'print');
     const overlays = [
       '.toast-region',
       '.modal-backdrop',
+      '.drawer-backdrop',
       '.dropdown-menu',
       '.tooltip',
       '.alert-close',

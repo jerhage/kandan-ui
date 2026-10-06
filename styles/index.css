@@ -62,6 +62,7 @@
 @import 'components/table.css' layer(components);
 @import 'components/modal/modal.css' layer(components);
 @import 'components/modal/modal-transitions.css' layer(components);
+@import 'components/drawer.css' layer(components);
 @import 'components/toast.css' layer(components);
 @import 'components/dropdown.css' layer(components);
 @import 'components/popover.css' layer(components);
