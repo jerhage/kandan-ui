@@ -259,6 +259,21 @@ own. The table of contents marks the entry of the section being read with
 like a server render, has no current entry; `table-of-contents/current-entry.html` is the markup
 with one, rendered from the props, and its rules describe how the script moves it.
 
+### A component beside another, not inside a wrapper
+
+Some variants place a component's parts as siblings, so the markup stays valid wherever the caller
+puts it.
+
+- `icon-button/hint` and `icon-button/hint-described` are an icon button with the library tooltip
+  in place of the browser's `title`. The button has no `title`, and the tooltip
+  (`span.tooltip`, `popover="hint"`, `role="tooltip"`) is its next sibling, as in
+  `tooltip/default`. When the tooltip's text is the button's label, its accessible name, the button
+  has no `aria-describedby`, so a screen reader does not announce the name twice (`hint`). When the
+  text differs from the label, `aria-describedby` names the tooltip (`hint-described`).
+  `rules/icon-button.json` restates the tooltip's rules on these fixtures, since a rule cannot refer
+  to another file's. The `title` variants are unchanged; a framework version offers the library
+  tooltip as an option of the icon button, not as a second component.
+
 ### Running the contract spec in a framework version
 
 The framework spec renders each variant, then calls `compareMarkup(rendered, fixture)` from
@@ -295,7 +310,7 @@ the framework renders it.
 ## The behaviour rules
 
 `rules/<component>.json` describes what a component's script (or a native element) does, for
-the twenty-one components that have one. A rule is a state before, an event, and a state after,
+the twenty-two components that have one. A rule is a state before, an event, and a state after,
 read against a fixture:
 
 ```json
