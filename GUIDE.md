@@ -249,6 +249,12 @@ state (an open menu, a drawn selection box, a leaving toast), the rules describe
 fixture shows the starting markup. Two fixtures are empty, because the component renders nothing
 until a script acts: `toast-clearance/default.html` and `window-dropzone/idle.html`.
 
+A state that a script sets and that a component also renders from its props has a fixture of its
+own. The table of contents marks the entry of the section being read with
+`aria-current="location"` on its link: a script moves it as the page scrolls, and the base fixture,
+like a server render, has no current entry; `table-of-contents/current-entry.html` is the markup
+with one, rendered from the props, and its rules describe how the script moves it.
+
 ### Running the contract spec in a framework version
 
 The framework spec renders each variant, then calls `compareMarkup(rendered, fixture)` from
@@ -285,7 +291,7 @@ the framework renders it.
 ## The behaviour rules
 
 `rules/<component>.json` describes what a component's script (or a native element) does, for
-the fifteen components that have one. A rule is a state before, an event, and a state after,
+the sixteen components that have one. A rule is a state before, an event, and a state after,
 read against a fixture:
 
 ```json

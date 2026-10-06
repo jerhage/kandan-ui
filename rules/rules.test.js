@@ -74,7 +74,7 @@ function selectorClasses(selector) {
 }
 
 describe('the behaviour rules', () => {
-  it('cover the fifteen components that run a script or a native behaviour', () => {
+  it('cover the sixteen components that run a script or a native behaviour', () => {
     assert.deepEqual(ruleFiles(), [
       'accordion-item.json',
       'carousel.json',
@@ -86,6 +86,7 @@ describe('the behaviour rules', () => {
       'modal.json',
       'popover.json',
       'search-field.json',
+      'table-of-contents.json',
       'tabs.json',
       'toast-clearance.json',
       'toast-region.json',
