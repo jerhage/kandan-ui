@@ -220,4 +220,26 @@ describe('rulesFileProblems', () => {
 
     assert.deepEqual(problemsOf({ when }), ['rules[0].when[0]: a pointerup follows a press']);
   });
+
+  it('accepts a scroll that names the element it brings to the top', () => {
+    const when = [{ event: 'scroll', to: '#fonts' }];
+
+    assert.deepEqual(problemsOf({ when }), []);
+  });
+
+  it('rejects a scroll that names no element to bring to the top', () => {
+    const when = [{ event: 'scroll', target: 'window' }];
+
+    assert.deepEqual(problemsOf({ when }), [
+      'rules[0].when[0]: a scroll names the element it brings to the top',
+    ]);
+  });
+
+  it('rejects an element to bring to the top on any trigger but a scroll', () => {
+    const when = [{ event: 'click', target: '.marquee-selection', to: '#fonts' }];
+
+    assert.deepEqual(problemsOf({ when }), [
+      'rules[0].when[0]: only a scroll names an element to bring to the top',
+    ]);
+  });
 });
