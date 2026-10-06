@@ -408,7 +408,11 @@ Before any script, check in this order:
    layer.
 2. A media query or a container query, for anything that depends on the screen or the container
    size. A presentation that changes at a breakpoint is a modifier with a query, never a script that
-   watches the width and swaps components.
+   watches the width and swaps components. `.modal-sheet` is one: on the modal's
+   `<dialog class="modal-backdrop">`, below the narrow breakpoint, it docks the modal to the bottom
+   edge and slides it in from there (`fixtures/modal/sheet.html`); above it the modal stays
+   centred. Every framework version exposes such a modifier as an option of the existing
+   component, never as a second component.
 3. A native element or attribute: `<dialog>`, `popover` (`auto`, `manual`, `hint`), `<details>`,
    form controls and their states, `:has()`, `:focus-visible`, `:popover-open`.
 4. A token or a custom property with a fallback, for a value that varies.
