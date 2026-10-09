@@ -84,6 +84,7 @@
 @import 'components/diagram.css' layer(components);
 @import 'components/sequence.css' layer(components);
 @import 'components/packet.css' layer(components);
+@import 'components/step-through.css' layer(components);
 @import 'components/step-list.css' layer(components);
 @import 'components/key-hints.css' layer(components);
 @import 'components/empty-state.css' layer(components);
